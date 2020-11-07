@@ -38,6 +38,18 @@ namespace Client.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSelectData", ReplyAction="http://tempuri.org/IService1/GetSelectDataResponse")]
         System.Threading.Tasks.Task<System.Data.DataTable> GetSelectDataAsync(string tableName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PrintConnectionInfo", ReplyAction="http://tempuri.org/IService1/PrintConnectionInfoResponse")]
+        void PrintConnectionInfo(string name, string port, string path, string uri, string scheme);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PrintConnectionInfo", ReplyAction="http://tempuri.org/IService1/PrintConnectionInfoResponse")]
+        System.Threading.Tasks.Task PrintConnectionInfoAsync(string name, string port, string path, string uri, string scheme);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PrintRowCount", ReplyAction="http://tempuri.org/IService1/PrintRowCountResponse")]
+        void PrintRowCount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/PrintRowCount", ReplyAction="http://tempuri.org/IService1/PrintRowCountResponse")]
+        System.Threading.Tasks.Task PrintRowCountAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +109,22 @@ namespace Client.ServiceReference1 {
         
         public System.Threading.Tasks.Task<System.Data.DataTable> GetSelectDataAsync(string tableName) {
             return base.Channel.GetSelectDataAsync(tableName);
+        }
+        
+        public void PrintConnectionInfo(string name, string port, string path, string uri, string scheme) {
+            base.Channel.PrintConnectionInfo(name, port, path, uri, scheme);
+        }
+        
+        public System.Threading.Tasks.Task PrintConnectionInfoAsync(string name, string port, string path, string uri, string scheme) {
+            return base.Channel.PrintConnectionInfoAsync(name, port, path, uri, scheme);
+        }
+        
+        public void PrintRowCount() {
+            base.Channel.PrintRowCount();
+        }
+        
+        public System.Threading.Tasks.Task PrintRowCountAsync() {
+            return base.Channel.PrintRowCountAsync();
         }
     }
 }
