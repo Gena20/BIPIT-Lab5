@@ -14,24 +14,10 @@ namespace Client
     public partial class Form1 : Form
     {
         ServiceReference1.Service1Client service;
-        Uri uri;
-        ServiceHost host;
 
         public Form1()
         {
             InitializeComponent();
-
-            service = new ServiceReference1.Service1Client("NetTcpBinding_IService1");
-            uri = new Uri("net.tcp://localhost:8734/Design_Time_Addresses/Service/Service1/");
-            host = new ServiceHost(service, uri);
-
-            service.PrintConnectionInfo(
-                host.Description.Name,
-                host.BaseAddresses[0].Port.ToString(),
-                host.BaseAddresses[0].LocalPath,
-                host.BaseAddresses[0].AbsoluteUri,
-                host.BaseAddresses[0].Scheme
-            );
         }
 
         private void FillComboBox(ComboBox comboBox, string tabelName)
@@ -43,6 +29,26 @@ namespace Client
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            {
+                service = new ServiceReference1.Service1Client("NetTcpBinding_IService1");
+                Uri uri = new Uri("net.tcp://localhost:8734/Design_Time_Addresses/Service/Service1/");
+                ServiceHost host = new ServiceHost(service, uri);
+
+                service.PrintConnectionInfo(
+                    host.Description.Name,
+                    host.BaseAddresses[0].Port.ToString(),
+                    host.BaseAddresses[0].LocalPath,
+                    host.BaseAddresses[0].AbsoluteUri,
+                    host.BaseAddresses[0].Scheme
+                );
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Close();
+            }
+
             dgvTrips.DataSource = service.GetData();
             FillComboBox(cbCar, "cars");
             FillComboBox(cbObjFrom, "objects");
