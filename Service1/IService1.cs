@@ -23,5 +23,11 @@ namespace Service1
 
         [OperationContract]
         DataTable GetSelectData(string tableName);
+
+        [OperationContract]
+        void PrintConnectionInfo(string name, string port, string path, string uri, string scheme);
+
+        [OperationContract]
+        void PrintRowCount();
     }
 }

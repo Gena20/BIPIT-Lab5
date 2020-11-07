@@ -14,6 +14,7 @@ namespace Service1
     {
         private string connectionString { get; } = "workstation id=autoTrips.mssql.somee.com;packet size=4096;user id=Gena20_SQLLogin_1;pwd=hlzsx7f1ej;data source=autoTrips.mssql.somee.com;persist security info=False;initial catalog=autoTrips";
 
+
         public void DoWork()
         {
         }
@@ -52,6 +53,7 @@ namespace Service1
                 var command = new SqlCommand(query) { Connection = connection };
                 command.ExecuteNonQuery();
             }
+            PrintRowCount();
             return true;
         }
 
@@ -72,6 +74,22 @@ namespace Service1
 
                 return table;
             }
+        }
+
+        public void PrintConnectionInfo(string name, string port, string path, string uri, string scheme)
+        {
+            Console.WriteLine("\nHost Info ");
+            Console.WriteLine($"Name: {name}");
+            Console.WriteLine($"Port: {port}");
+            Console.WriteLine($"LocalPath: {path}");
+            Console.WriteLine($"Uri: {uri}");
+            Console.WriteLine($"Scheme: {scheme}");
+            Console.WriteLine(new string('-', 20) + "\n");
+        }
+
+        public void PrintRowCount()
+        {
+            Console.WriteLine($"\nRows in the DB: {GetData().Rows.Count} \n");
         }
     }
 }
